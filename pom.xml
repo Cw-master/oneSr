@@ -18,6 +18,5 @@
     <modules>
         <module>oneSr-admin</module>
         <module>oneSr-common</module>
-        <module>oneSr-urights</module>
     </modules>
 </project>
