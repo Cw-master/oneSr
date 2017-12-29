@@ -7,7 +7,10 @@
     <groupId>cxb.wjzf</groupId>
     <artifactId>oneSr-urights</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
+    <name>oneSr-urights</name>
+    <url>http://www.yizhanyd.top</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
@@ -15,4 +18,14 @@
         <maven.compiler.target>1.7</maven.compiler.target>
         <maven.compiler.compilerVersion>1.7</maven.compiler.compilerVersion>
     </properties>
+
+    <modules>
+        <module>oneSr-urights-client</module>
+        <module>oneSr-urights-common</module>
+        <module>oneSr-urights-dao</module>
+        <module>oneSr-urights-rpc-api</module>
+        <module>oneSr-urights-rpc-service</module>
+        <module>oneSr-urights-server</module>
+    </modules>
+
 </project>

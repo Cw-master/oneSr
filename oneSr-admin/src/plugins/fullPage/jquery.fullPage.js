@@ -90,7 +90,7 @@
 
     $.fn.fullpage = function(options) {
 
-        // common jQuery objects
+        // client jQuery objects
         var $htmlBody = $('html, body');
         var $body = $('body');
 
@@ -693,7 +693,7 @@
         * keeping the link with the style sheet.
         */
         function addInternalSelectors(){
-            //adding internal class names to void problem with common ones
+            //adding internal class names to void problem with client ones
             $(options.sectionSelector).each(function(){
                 $(this).addClass(SECTION);
             });
