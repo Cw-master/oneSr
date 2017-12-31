@@ -35,7 +35,7 @@
         </dependency>
         <!--引入rpc接口包-->
         <dependency>
-            <groupId>cxb-wjzf</groupId>
+            <groupId>cxb.wjzf</groupId>
             <artifactId>oneSr-urights-rpc-api</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>

@@ -6,5 +6,4 @@ package cxb.chen.common.base;
  */
 public class BaseConstants {
 
-
 }
