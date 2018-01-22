@@ -1,6 +1,6 @@
 package ${package_name}.rpc.api;
 
-import com.zheng.common.base.BaseServiceMock;
+import cxb.chen.common.base.BaseServiceMock;
 import ${package_name}.dao.mapper.${model}Mapper;
 import ${package_name}.dao.model.${model};
 import ${package_name}.dao.model.${model}Example;

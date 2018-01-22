@@ -6,7 +6,7 @@ import com.zheng.common.util.PropertiesFileUtil;
 import com.zheng.upms.dao.model.UpmsPermission;
 import com.zheng.upms.dao.model.UpmsRole;
 import com.zheng.upms.dao.model.UpmsUser;
-import com.zheng.upms.rpc.api.UpmsApiService;
+import com.zheng.upms.rpc.UpmsApiService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -32,7 +32,7 @@ public class UrightsRealm extends AuthorizingRealm {
     private static final Logger LOGGER = LoggerFactory.getLogger(UrightsRealm.class);
 
     @Autowired
-    private UpmsApiService upmsApiService;
+    private UrightsApiService upmsApiService;
 
     */
 /**

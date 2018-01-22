@@ -1,7 +1,7 @@
 package ${package_name}.rpc.service.impl;
 
-import com.zheng.common.annotation.BaseService;
-import com.zheng.common.base.BaseServiceImpl;
+import cxb.chen.common.annotation.BaseService;
+import cxb.chen.common.base.BaseServiceImpl;
 import ${package_name}.dao.mapper.${model}Mapper;
 import ${package_name}.dao.model.${model};
 import ${package_name}.dao.model.${model}Example;

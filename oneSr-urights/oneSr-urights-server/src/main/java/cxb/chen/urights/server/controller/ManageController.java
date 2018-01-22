@@ -1,9 +1,12 @@
 package cxb.chen.urights.server.controller;
 
-import com.zheng.common.base.BaseController;
-import com.zheng.upms.dao.model.*;
-import com.zheng.upms.rpc.api.UpmsApiService;
-import com.zheng.upms.rpc.api.UpmsSystemService;
+import cxb.chen.common.base.BaseController;
+import cxb.chen.urights.dao.model.UrightsPermission;
+import cxb.chen.urights.dao.model.UrightsSystem;
+import cxb.chen.urights.dao.model.UrightsSystemExample;
+import cxb.chen.urights.dao.model.UrightsUser;
+import cxb.chen.urights.rpc.api.UrightsApiService;
+import cxb.chen.urights.rpc.api.UrightsSystemService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.SecurityUtils;
@@ -30,26 +33,26 @@ public class ManageController extends BaseController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ManageController.class);
 
 	@Autowired
-	private UpmsSystemService upmsSystemService;
+	private UrightsSystemService urightsSystemService;
 
 	@Autowired
-	private UpmsApiService upmsApiService;
+	private UrightsApiService urightsApiService;
 
 	@ApiOperation(value = "后台首页")
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String index(ModelMap modelMap) {
 		// 已注册系统
-		UpmsSystemExample upmsSystemExample = new UpmsSystemExample();
-		upmsSystemExample.createCriteria()
+		UrightsSystemExample urightsSystemExample = new UrightsSystemExample();
+		urightsSystemExample.createCriteria()
 				.andStatusEqualTo((byte) 1);
-		List<UpmsSystem> upmsSystems = upmsSystemService.selectByExample(upmsSystemExample);
-		modelMap.put("upmsSystems", upmsSystems);
+		List<UrightsSystem> urightsSystems = urightsSystemService.selectByExample(urightsSystemExample);
+		modelMap.put("urightsSystems", urightsSystems);
 		// 当前登录用户权限
 		Subject subject = SecurityUtils.getSubject();
 		String username = (String) subject.getPrincipal();
-		UpmsUser upmsUser = upmsApiService.selectUpmsUserByUsername(username);
-		List<UpmsPermission> upmsPermissions = upmsApiService.selectUpmsPermissionByUpmsUserId(upmsUser.getUserId());
-		modelMap.put("upmsPermissions", upmsPermissions);
+		UrightsUser UrightsUser = urightsApiService.selectUrightsUserByUsername(username);
+		List<UrightsPermission> urightsPermissions = urightsApiService.selectUrightsPermissionByUrightsUserId(UrightsUser.getUserId());
+		modelMap.put("urightsPermissions", urightsPermissions);
 		return "/manage/index.jsp";
 	}
 

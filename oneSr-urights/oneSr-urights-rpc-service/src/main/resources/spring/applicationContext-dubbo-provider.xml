@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="zheng-Urights-rpc-service"/>
+
+    <dubbo:registry address="zookeeper://zkserver:2181"/>
+
+    <dubbo:protocol name="dubbo" port="20881"/>
+
+    <!--<dubbo:monitor protocol="registry"/>-->
+
+    <!-- 系统 -->
+    <bean id="urightsSystemService" class="cxb.chen.urights.rpc.service.impl.UrightsSystemServiceImpl"/>
+    <dubbo:service interface="cxb.chen.urights.rpc.api.UrightsSystemService" ref="urightsSystemService" timeout="10000"/>
+
+    <!-- 组织 -->
+    <bean id="urightsOrganizationService" class="cxb.chen.urights.rpc.service.impl.UrightsOrganizationServiceImpl"/>
+    <dubbo:service interface="cxb.chen.urights.rpc.api.UrightsOrganizationService" ref="urightsOrganizationService" timeout="10000"/>
+
+    <!-- 用户组织 -->
+    <bean id="urightsUserOrganizationService" class="cxb.chen.urights.rpc.service.impl.UrightsUserOrganizationServiceImpl"/>
+    <dubbo:service interface="cxb.chen.urights.rpc.api.UrightsUserOrganizationService" ref="urightsUserOrganizationService" timeout="10000"/>
+
+    <!-- 用户 -->
+    <bean id="urightsUserService" class="cxb.chen.urights.rpc.service.impl.UrightsUserServiceImpl"/>
+    <dubbo:service interface="cxb.chen.urights.rpc.api.UrightsUserService" ref="urightsUserService" timeout="10000"/>
+
+    <!-- 角色 -->
+    <bean id="urightsRoleService" class="cxb.chen.urights.rpc.service.impl.UrightsRoleServiceImpl"/>
+    <dubbo:service interface="cxb.chen.urights.rpc.api.UrightsRoleService" ref="urightsRoleService" timeout="10000"/>
+
+    <!-- 权限 -->
+    <bean id="urightsPermissionService" class="cxb.chen.urights.rpc.service.impl.UrightsPermissionServiceImpl"/>
+    <dubbo:service interface="cxb.chen.urights.rpc.api.UrightsPermissionService" ref="urightsPermissionService" timeout="10000"/>
+
+    <!-- 角色权限 -->
+    <bean id="urightsRolePermissionService" class="cxb.chen.urights.rpc.service.impl.UrightsRolePermissionServiceImpl"/>
+    <dubbo:service interface="cxb.chen.urights.rpc.api.UrightsRolePermissionService" ref="urightsRolePermissionService" timeout="10000"/>
+
+    <!-- 用户权限 -->
+    <bean id="urightsUserPermissionService" class="cxb.chen.urights.rpc.service.impl.UrightsUserPermissionServiceImpl"/>
+    <dubbo:service interface="cxb.chen.urights.rpc.api.UrightsUserPermissionService" ref="urightsUserPermissionService" timeout="10000"/>
+
+    <!-- 用户角色 -->
+    <bean id="urightsUserRoleService" class="cxb.chen.urights.rpc.service.impl.UrightsUserRoleServiceImpl"/>
+    <dubbo:service interface="cxb.chen.urights.rpc.api.UrightsUserRoleService" ref="urightsUserRoleService" timeout="10000"/>
+
+    <!-- 操作日志 -->
+    <bean id="urightsLogService" class="cxb.chen.urights.rpc.service.impl.UrightsLogServiceImpl"/>
+    <dubbo:service interface="cxb.chen.urights.rpc.api.UrightsLogService" ref="urightsLogService" timeout="10000"/>
+
+    <!-- 接口服务 -->
+    <bean id="urightsApiService" class="cxb.chen.urights.rpc.service.impl.UrightsApiServiceImpl"/>
+    <dubbo:service interface="cxb.chen.urights.rpc.api.UrightsApiService" ref="urightsApiService" timeout="10000"/>
+
+</beans>

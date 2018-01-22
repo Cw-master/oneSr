@@ -1,6 +1,6 @@
 package cxb.chen.urights.server;
 
-import com.zheng.common.base.BaseInterface;
+import cxb.chen.common.base.BaseInterface;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
