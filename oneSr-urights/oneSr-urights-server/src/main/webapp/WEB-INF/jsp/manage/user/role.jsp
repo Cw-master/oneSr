@@ -10,8 +10,8 @@
 	<form id="roleForm" method="post">
 		<div class="form-group">
 			<select id="roleId" name="roleId" multiple="multiple" style="width: 100%">
-				<c:forEach var="upmsRole" items="${upmsRoles}">
-					<option value="${upmsRole.roleId}" <c:forEach var="upmsUserRole" items="${upmsUserRoles}"><c:if test="${upmsRole.roleId==upmsUserRole.roleId}">selected="selected"</c:if></c:forEach>>${upmsRole.title}</option>
+				<c:forEach var="urightsRole" items="${urightsRoles}">
+					<option value="${urightsRole.roleId}" <c:forEach var="urightsUserRole" items="${urightsUserRoles}"><c:if test="${urightsRole.roleId==urightsUserRole.roleId}">selected="selected"</c:if></c:forEach>>${urightsRole.title}</option>
 				</c:forEach>
 			</select>
 		</div>

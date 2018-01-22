@@ -14,17 +14,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>权限管理系统</title>
 
-	<link href="${basePath}/resources/zheng-admin/plugins/bootstrap-3.3.0/css/bootstrap.min.css" rel="stylesheet"/>
-	<link href="${basePath}/resources/zheng-admin/plugins/material-design-iconic-font-2.2.0/css/material-design-iconic-font.min.css" rel="stylesheet"/>
-	<link href="${basePath}/resources/zheng-admin/plugins/waves-0.7.5/waves.min.css" rel="stylesheet"/>
-	<link href="${basePath}/resources/zheng-admin/plugins/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
-	<link href="${basePath}/resources/zheng-admin/css/admin.css" rel="stylesheet"/>
+	<link href="${basePath}/resources/oneSr-admin/plugins/bootstrap-3.3.0/css/bootstrap.min.css" rel="stylesheet"/>
+	<link href="${basePath}/resources/oneSr-admin/plugins/material-design-iconic-font-2.2.0/css/material-design-iconic-font.min.css" rel="stylesheet"/>
+	<link href="${basePath}/resources/oneSr-admin/plugins/waves-0.7.5/waves.min.css" rel="stylesheet"/>
+	<link href="${basePath}/resources/oneSr-admin/plugins/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+	<link href="${basePath}/resources/oneSr-admin/css/admin.css" rel="stylesheet"/>
 	<style>
 		/** skins **/
-		<c:forEach var="upmsSystem" items="${upmsSystems}">
-		#${upmsSystem.name} #header {background: ${upmsSystem.theme};}
-		#${upmsSystem.name} .content_tab{background: ${upmsSystem.theme};}
-		#${upmsSystem.name} .s-profile>a{background: url(${basePath}${upmsSystem.banner}) left top no-repeat;}
+		<c:forEach var="urightsSystem" items="${urightsSystems}">
+		#${urightsSystem.name} #header {background: ${urightsSystem.theme};}
+		#${urightsSystem.name} .content_tab{background: ${urightsSystem.theme};}
+		#${urightsSystem.name} .s-profile>a{background: url(${basePath}${urightsSystem.banner}) left top no-repeat;}
 		</c:forEach>
 	</style>
 </head>
@@ -40,7 +40,7 @@
 		</li>
 		<li id="logo" class="hidden-xs">
 			<a href="${basePath}/manage/index">
-				<img src="${basePath}/resources/zheng-admin/images/logo.png"/>
+				<img src="${basePath}/resources/oneSr-admin/images/logo.png"/>
 			</a>
 			<span id="system_title">权限管理系统</span>
 		</li>
@@ -71,9 +71,9 @@
 							请选择系统切换
 						</li>
 						<li class="divider hidden-xs"></li>
-						<c:forEach var="upmsSystem" items="${upmsSystems}">
+						<c:forEach var="urightsSystem" items="${urightsSystems}">
 						<li>
-							<a class="waves-effect switch-systems" href="javascript:;" systemid="${upmsSystem.systemId}" systemname="${upmsSystem.name}" systemtitle="${upmsSystem.title}"><i class="${upmsSystem.icon}"></i> ${upmsSystem.title}</a>
+							<a class="waves-effect switch-systems" href="javascript:;" systemid="${urightsSystem.systemId}" systemname="${urightsSystem.name}" systemtitle="${urightsSystem.title}"><i class="${urightsSystem.icon}"></i> ${urightsSystem.title}</a>
 						</li>
 						</c:forEach>
 					</ul>
@@ -111,10 +111,10 @@
 		<div class="s-profile">
 			<a class="waves-effect waves-light" href="javascript:;">
 				<div class="sp-pic">
-					<img src="${basePath}${upmsUser.avatar}"/>
+					<img src="${basePath}${urightsUser.avatar}"/>
 				</div>
 				<div class="sp-info">
-					${upmsUser.realname}，您好！
+					${urightsUser.realname}，您好！
 					<i class="zmdi zmdi-caret-down"></i>
 				</div>
 			</a>
@@ -139,18 +139,18 @@
 			<li>
 				<a class="waves-effect" href="javascript:Tab.addTab('首页', 'home');"><i class="zmdi zmdi-home"></i> 首页</a>
 			</li>
-			<c:forEach var="upmsPermission" items="${upmsPermissions}" varStatus="status">
-				<c:if test="${upmsPermission.pid == 0}">
-				<li class="sub-menu system_menus system_${upmsPermission.systemId} ${status.index}" <c:if test="${upmsPermission.systemId != 1}">style="display:none;"</c:if>>
-					<a class="waves-effect" href="javascript:;"><i class="${upmsPermission.icon}"></i> ${upmsPermission.name}</a>
+			<c:forEach var="urightsPermission" items="${urightsPermissions}" varStatus="status">
+				<c:if test="${urightsPermission.pid == 0}">
+				<li class="sub-menu system_menus system_${urightsPermission.systemId} ${status.index}" <c:if test="${urightsPermission.systemId != 1}">style="display:none;"</c:if>>
+					<a class="waves-effect" href="javascript:;"><i class="${urightsPermission.icon}"></i> ${urightsPermission.name}</a>
 					<ul>
-						<c:forEach var="subUpmsPermission" items="${upmsPermissions}">
-							<c:if test="${subUpmsPermission.pid == upmsPermission.permissionId}">
-								<c:forEach var="upmsSystem" items="${upmsSystems}">
-									<c:if test="${subUpmsPermission.systemId == upmsSystem.systemId}">
-									<c:set var="systemBasePath" value="${upmsSystem.basepath}"/></c:if>
+						<c:forEach var="suburightsPermission" items="${urightsPermissions}">
+							<c:if test="${suburightsPermission.pid == urightsPermission.permissionId}">
+								<c:forEach var="urightsSystem" items="${urightsSystems}">
+									<c:if test="${suburightsPermission.systemId == urightsSystem.systemId}">
+									<c:set var="systemBasePath" value="${urightsSystem.basepath}"/></c:if>
 								</c:forEach>
-								<li><a class="waves-effect" href="javascript:Tab.addTab('${subUpmsPermission.name}', '${systemBasePath}${subUpmsPermission.uri}');">${subUpmsPermission.name}</a></li>
+								<li><a class="waves-effect" href="javascript:Tab.addTab('${suburightsPermission.name}', '${systemBasePath}${suburightsPermission.uri}');">${suburightsPermission.name}</a></li>
 							</c:if>
 						</c:forEach>
 					</ul>
@@ -158,7 +158,7 @@
 				</c:if>
 			</c:forEach>
 			<li>
-				<div class="upms-version">&copy; ZHENG-UPMS V1.0.0</div>
+				<div class="urights-version">&copy; oneSr-urights V1.0.0</div>
 			</li>
 		</ul>
 		<!-- /菜单区 -->
@@ -181,7 +181,7 @@
 		<div class="content_main">
 			<div id="iframe_home" class="iframe cur">
 				<p><h4>通用用户权限管理系统</h4></p>
-				<p><b>演示地址</b>：<a href="http://www.zhangshuzheng.cn/zhengAdmin" target="_blank">http://www.zhangshuzheng.cn/zhengAdmin</a></p>
+				<p><b>演示地址</b>：<a href="http://www.www.yizhanyd.top/oneSrAdmin" target="_blank">http://www.zhangshuoneSr.cn/oneSrAdmin</a></p>
 				<p><b>系统简介</b>：本系统是基于RBAC授权和基于用户授权的细粒度权限控制通用平台，并提供单点登录、会话管理和日志管理。接入的系统可自由定义组织、角色、权限、资源等。</p><br/>
 				<p><h4>系统功能概述：</h4></p>
 				<p><b>系统组织管理</b>：系统和组织增加、删除、修改、查询功能。</p>
@@ -202,15 +202,15 @@
 </section>
 <footer id="footer"></footer>
 <script>var BASE_PATH = '${basePath}';</script>
-<script src="${basePath}/resources/zheng-admin/plugins/jquery.1.12.4.min.js"></script>
-<script src="${basePath}/resources/zheng-admin/plugins/bootstrap-3.3.0/js/bootstrap.min.js"></script>
-<script src="${basePath}/resources/zheng-admin/plugins/waves-0.7.5/waves.min.js"></script>
-<script src="${basePath}/resources/zheng-admin/plugins/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="${basePath}/resources/zheng-admin/plugins/BootstrapMenu.min.js"></script>
-<script src="${basePath}/resources/zheng-admin/plugins/device.min.js"></script>
-<script src="${basePath}/resources/zheng-admin/plugins/jquery.cookie.js"></script>
-<script src="${basePath}/resources/zheng-admin/js/admin.js"></script>
-<script src="${basePath}/resources/zheng-admin/plugins/fullPage/jquery.fullPage.min.js"></script>
-<script src="${basePath}/resources/zheng-admin/plugins/fullPage/jquery.jdirk.min.js"></script>
+<script src="${basePath}/resources/oneSr-admin/plugins/jquery.1.12.4.min.js"></script>
+<script src="${basePath}/resources/oneSr-admin/plugins/bootstrap-3.3.0/js/bootstrap.min.js"></script>
+<script src="${basePath}/resources/oneSr-admin/plugins/waves-0.7.5/waves.min.js"></script>
+<script src="${basePath}/resources/oneSr-admin/plugins/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="${basePath}/resources/oneSr-admin/plugins/BootstrapMenu.min.js"></script>
+<script src="${basePath}/resources/oneSr-admin/plugins/device.min.js"></script>
+<script src="${basePath}/resources/oneSr-admin/plugins/jquery.cookie.js"></script>
+<script src="${basePath}/resources/oneSr-admin/js/admin.js"></script>
+<script src="${basePath}/resources/oneSr-admin/plugins/fullPage/jquery.fullPage.min.js"></script>
+<script src="${basePath}/resources/oneSr-admin/plugins/fullPage/jquery.jdirk.min.js"></script>
 </body>
 </html>

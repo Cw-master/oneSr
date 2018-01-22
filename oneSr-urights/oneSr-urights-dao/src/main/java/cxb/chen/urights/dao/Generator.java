@@ -13,7 +13,7 @@ public class Generator {
 
     // 根据命名规范，只修改此常量值即可
     private static String MODULE = "oneSr-urights";
-    private static String DATABASE = "oneStopReading";
+    private static String DATABASE = "onesr";
     private static String TABLE_PREFIX = "uright_";
     private static String PACKAGE_NAME = "cxb.chen.urights";
 

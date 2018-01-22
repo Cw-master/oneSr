@@ -10,8 +10,8 @@
 	<form id="organizationForm" method="post">
 		<div class="form-group">
 			<select id="organizationId" name="organizationId" multiple="multiple" style="width: 100%">
-				<c:forEach var="upmsOrganization" items="${upmsOrganizations}">
-					<option value="${upmsOrganization.organizationId}" <c:forEach var="upmsUserOrganization" items="${upmsUserOrganizations}"><c:if test="${upmsOrganization.organizationId==upmsUserOrganization.organizationId}">selected="selected"</c:if></c:forEach>>${upmsOrganization.name}</option>
+				<c:forEach var="urightsOrganization" items="${urightsOrganizations}">
+					<option value="${urightsOrganization.organizationId}" <c:forEach var="urightsUserOrganization" items="${urightsUserOrganizations}"><c:if test="${urightsOrganization.organizationId==urightsUserOrganization.organizationId}">selected="selected"</c:if></c:forEach>>${urightsOrganization.name}</option>
 				</c:forEach>
 			</select>
 		</div>

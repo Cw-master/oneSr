@@ -26,8 +26,8 @@
 			<span class="type1 type2 type3">
 				<select id="systemId" name="systemId">
 					<option value="0">请选择系统</option>
-					<c:forEach var="upmsSystem" items="${upmsSystems}">
-					<option value="${upmsSystem.systemId}" <c:if test="${permission.systemId==upmsSystem.systemId}">selected="selected"</c:if>>${upmsSystem.title}</option>
+					<c:forEach var="urightsSystem" items="${urightsSystems}">
+					<option value="${urightsSystem.systemId}" <c:if test="${permission.systemId==urightsSystem.systemId}">selected="selected"</c:if>>${urightsSystem.title}</option>
 					</c:forEach>
 				</select>
 			</span>

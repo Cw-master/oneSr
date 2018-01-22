@@ -18,7 +18,7 @@
 <body>
 <div id="main">
 	<div id="toolbar">
-		<shiro:hasPermission name="upms:log:delete"><a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 删除日志</a></shiro:hasPermission>
+		<shiro:hasPermission name="urights:log:delete"><a class="waves-effect waves-button" href="javascript:;" onclick="deleteAction()"><i class="zmdi zmdi-close"></i> 删除日志</a></shiro:hasPermission>
 	</div>
 	<table id="table"></table>
 </div>

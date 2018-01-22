@@ -18,7 +18,7 @@
 <body>
 <div id="main">
 	<div id="toolbar">
-		<shiro:hasPermission name="upms:session:forceout"><a class="waves-effect waves-button" href="javascript:;" onclick="forceoutAction()"><i class="zmdi zmdi-run"></i> 强制退出</a></shiro:hasPermission>
+		<shiro:hasPermission name="urights:session:forceout"><a class="waves-effect waves-button" href="javascript:;" onclick="forceoutAction()"><i class="zmdi zmdi-run"></i> 强制退出</a></shiro:hasPermission>
 	</div>
 	<table id="table"></table>
 </div>
