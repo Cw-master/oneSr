@@ -7,7 +7,7 @@ import cxb.chen.urights.dao.model.UrightsRolePermissionExample;
 
 /**
 * UpmsRolePermissionService接口
-* Created by shuzheng on 2017/3/20.
+* @author chen
 */
 public interface UrightsRolePermissionService extends BaseService<UrightsRolePermission, UrightsRolePermissionExample> {
 

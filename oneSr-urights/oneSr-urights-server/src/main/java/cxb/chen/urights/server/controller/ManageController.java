@@ -23,7 +23,7 @@ import java.util.List;
 
 /**
  * 后台controller
- * Created by ZhangShuzheng on 2017/01/19.
+ * @author chen
  */
 @Controller
 @RequestMapping("/manage")

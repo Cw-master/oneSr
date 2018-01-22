@@ -8,7 +8,7 @@ import cxb.chen.urights.dao.model.UrightsOrganizationExample;
 
 /**
 * 降级实现UpmsOrganizationService接口
-* Created by shuzheng on 2017/3/20.
+* @author chen
 */
 public class UrightsOrganizationServiceMock extends BaseServiceMock<UrightsOrganizationMapper, UrightsOrganization, UrightsOrganizationExample> implements UrightsOrganizationService {
 

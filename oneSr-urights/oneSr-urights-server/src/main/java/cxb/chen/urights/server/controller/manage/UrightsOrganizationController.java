@@ -27,7 +27,7 @@ import java.util.Map;
 
 /**
  * 组织controller
- * Created by shuzheng on 2017/2/6.
+ * @author chen
  */
 @Controller
 @Api(value = "组织管理", description = "组织管理")
