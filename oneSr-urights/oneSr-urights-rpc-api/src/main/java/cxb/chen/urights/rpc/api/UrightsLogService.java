@@ -6,7 +6,7 @@ import cxb.chen.urights.dao.model.UrightsLogExample;
 
 /**
 * UpmsLogService接口
-* Created by shuzheng on 2017/3/20.
+* @author chen
 */
 public interface UrightsLogService extends BaseService<UrightsLog, UrightsLogExample> {
 

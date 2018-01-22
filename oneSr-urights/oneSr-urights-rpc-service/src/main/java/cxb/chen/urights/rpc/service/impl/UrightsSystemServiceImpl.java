@@ -1,11 +1,11 @@
 package cxb.chen.urights.rpc.service.impl;
 
-import com.zheng.common.annotation.BaseService;
-import com.zheng.common.base.BaseServiceImpl;
-import com.zheng.upms.dao.mapper.UpmsSystemMapper;
-import com.zheng.upms.dao.model.UpmsSystem;
-import com.zheng.upms.dao.model.UpmsSystemExample;
-import com.zheng.upms.rpc.api.UpmsSystemService;
+import cxb.chen.common.annotation.BaseService;
+import cxb.chen.common.base.BaseServiceImpl;
+import cxb.chen.urights.dao.mapper.UrightsSystemMapper;
+import cxb.chen.urights.dao.model.UrightsSystem;
+import cxb.chen.urights.dao.model.UrightsSystemExample;
+import cxb.chen.urights.rpc.api.UrightsSystemService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,27 +15,27 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
-* UpmsSystemService实现
-* Created by shuzheng on 2017/3/20.
+* UrightsSystemService实现
+* @author chen 
 */
 @Service
 @Transactional
 @BaseService
-public class UrightsSystemServiceImpl extends BaseServiceImpl<UpmsSystemMapper, UpmsSystem, UpmsSystemExample> implements UpmsSystemService {
+public class UrightsSystemServiceImpl extends BaseServiceImpl<UrightsSystemMapper, UrightsSystem, UrightsSystemExample> implements UrightsSystemService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UrightsSystemServiceImpl.class);
 
     @Autowired
-    UpmsSystemMapper upmsSystemMapper;
+    UrightsSystemMapper urightsSystemMapper;
 
     @Override
-    public UpmsSystem selectUpmsSystemByName(String name) {
-        UpmsSystemExample upmsSystemExample = new UpmsSystemExample();
-        upmsSystemExample.createCriteria()
+    public UrightsSystem selectUrightsSystemByName(String name) {
+        UrightsSystemExample UrightsSystemExample = new UrightsSystemExample();
+        UrightsSystemExample.createCriteria()
                 .andNameEqualTo(name);
-        List<UpmsSystem> upmsSystems = upmsSystemMapper.selectByExample(upmsSystemExample);
-        if (null != upmsSystems && upmsSystems.size() > 0) {
-            return upmsSystems.get(0);
+        List<UrightsSystem> UrightsSystems = urightsSystemMapper.selectByExample(UrightsSystemExample);
+        if (null != UrightsSystems && UrightsSystems.size() > 0) {
+            return UrightsSystems.get(0);
         }
         return null;
     }

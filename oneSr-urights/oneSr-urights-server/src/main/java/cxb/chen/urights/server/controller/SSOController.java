@@ -38,7 +38,7 @@ import java.util.UUID;
 
 /**
  * 单点登录管理
- * Created by shuzheng on 2016/12/10.
+ * @author chen
  */
 @Controller
 @RequestMapping("/sso")

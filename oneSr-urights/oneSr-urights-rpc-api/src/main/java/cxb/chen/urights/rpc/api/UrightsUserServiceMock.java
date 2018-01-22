@@ -8,7 +8,7 @@ import cxb.chen.urights.dao.model.UrightsUserExample;
 
 /**
 * 降级实现UpmsUserService接口
-* Created by shuzheng on 2017/3/20.
+* @author chen
 */
 public class UrightsUserServiceMock extends BaseServiceMock<UrightsUserMapper, UrightsUser, UrightsUserExample> implements UrightsUserService {
 

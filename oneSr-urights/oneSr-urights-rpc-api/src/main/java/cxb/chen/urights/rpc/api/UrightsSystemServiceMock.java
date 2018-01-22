@@ -7,13 +7,13 @@ import cxb.chen.urights.dao.model.UrightsSystem;
 import cxb.chen.urights.dao.model.UrightsSystemExample;
 
 /**
-* 降级实现UpmsSystemService接口
-* Created by shuzheng on 2017/3/20.
+* 降级实现UrightsSystemService接口
+* @author chen
 */
 public class UrightsSystemServiceMock extends BaseServiceMock<UrightsSystemMapper, UrightsSystem, UrightsSystemExample> implements UrightsSystemService {
 
     @Override
-    public UrightsSystem selectUpmsSystemByName(String name) {
+    public UrightsSystem selectUrightsSystemByName(String name) {
         return null;
     }
 

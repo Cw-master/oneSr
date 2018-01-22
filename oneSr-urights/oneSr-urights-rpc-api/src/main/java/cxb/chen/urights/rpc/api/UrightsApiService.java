@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * upms系统接口
- * Created by shuzheng on 2017/2/11.
+ * @author chen
  */
 public interface UrightsApiService {
 
