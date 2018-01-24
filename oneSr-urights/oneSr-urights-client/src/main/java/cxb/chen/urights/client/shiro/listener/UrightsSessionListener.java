@@ -6,7 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Created by shuzheng on 2017/2/12.
+ * 监听
+ * @author chen
  */
 public class UrightsSessionListener implements SessionListener {
 

@@ -7,7 +7,7 @@
         http://code.alibabatech.com/schema/dubbo
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <dubbo:application name="zheng-Urights-rpc-service"/>
+    <dubbo:application name="oneSr-urights-rpc-service"/>
 
     <dubbo:registry address="zookeeper://zkserver:2181"/>
 

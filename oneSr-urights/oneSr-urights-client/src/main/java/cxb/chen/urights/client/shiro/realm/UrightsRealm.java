@@ -1,12 +1,11 @@
-/*
 package cxb.chen.urights.client.shiro.realm;
 
-import com.zheng.common.util.MD5Util;
-import com.zheng.common.util.PropertiesFileUtil;
-import com.zheng.upms.dao.model.UpmsPermission;
-import com.zheng.upms.dao.model.UpmsRole;
-import com.zheng.upms.dao.model.UpmsUser;
-import com.zheng.upms.rpc.UpmsApiService;
+import cxb.chen.common.util.MD5Util;
+import cxb.chen.common.util.PropertiesFileUtil;
+import cxb.chen.urights.dao.model.UrightsPermission;
+import cxb.chen.urights.dao.model.UrightsRole;
+import cxb.chen.urights.dao.model.UrightsUser;
+import cxb.chen.urights.rpc.api.UrightsApiService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -21,46 +20,42 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-*/
 /**
  * 用户认证和授权
- * Created by shuzheng on 2017/1/20.
- *//*
-
+ * @author chen
+ */
 public class UrightsRealm extends AuthorizingRealm {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UrightsRealm.class);
 
     @Autowired
-    private UrightsApiService upmsApiService;
+    private UrightsApiService urightsApiService;
 
-    */
-/**
+    /**
      * 授权：验证权限时调用
      * @param principalCollection
      * @return
-     *//*
-
+     */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         String username = (String) principalCollection.getPrimaryPrincipal();
-        UpmsUser upmsUser = upmsApiService.selectUpmsUserByUsername(username);
+        UrightsUser urightsUser = urightsApiService.selectUrightsUserByUsername(username);
 
         // 当前用户所有角色
-        List<UpmsRole> upmsRoles = upmsApiService.selectUpmsRoleByUpmsUserId(upmsUser.getUserId());
+        List<UrightsRole> UrightsRoles = urightsApiService.selectUrightsRoleByUrightsUserId(urightsUser.getUserId());
         Set<String> roles = new HashSet<>();
-        for (UpmsRole upmsRole : upmsRoles) {
-            if (StringUtils.isNotBlank(upmsRole.getName())) {
-                roles.add(upmsRole.getName());
+        for (UrightsRole urightsRole : UrightsRoles) {
+            if (StringUtils.isNotBlank(urightsRole.getName())) {
+                roles.add(urightsRole.getName());
             }
         }
 
         // 当前用户所有权限
-        List<UpmsPermission> upmsPermissions = upmsApiService.selectUpmsPermissionByUpmsUserId(upmsUser.getUserId());
+        List<UrightsPermission> UrightsPermissions = urightsApiService.selectUrightsPermissionByUrightsUserId(urightsUser.getUserId());
         Set<String> permissions = new HashSet<>();
-        for (UpmsPermission upmsPermission : upmsPermissions) {
-            if (StringUtils.isNotBlank(upmsPermission.getPermissionValue())) {
-                permissions.add(upmsPermission.getPermissionValue());
+        for (UrightsPermission urightsPermission : UrightsPermissions) {
+            if (StringUtils.isNotBlank(urightsPermission.getPermissionValue())) {
+                permissions.add(urightsPermission.getPermissionValue());
             }
         }
 
@@ -70,34 +65,32 @@ public class UrightsRealm extends AuthorizingRealm {
         return simpleAuthorizationInfo;
     }
 
-    */
-/**
+    /**
      * 认证：登录时调用
      * @param authenticationToken
      * @return
      * @throws AuthenticationException
-     *//*
-
+     */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         String username = (String) authenticationToken.getPrincipal();
         String password = new String((char[]) authenticationToken.getCredentials());
         // client无密认证
-        String upmsType = PropertiesFileUtil.getInstance("zheng-upms-client").get("zheng.upms.type");
-        if ("client".equals(upmsType)) {
+        String urightsType = PropertiesFileUtil.getInstance("oneSr-urights-client").get("oneSr.urights.type");
+        if ("client".equals(urightsType)) {
             return new SimpleAuthenticationInfo(username, password, getName());
         }
 
         // 查询用户信息
-        UpmsUser upmsUser = upmsApiService.selectUpmsUserByUsername(username);
+        UrightsUser urightsUser = urightsApiService.selectUrightsUserByUsername(username);
 
-        if (null == upmsUser) {
+        if (null == urightsUser) {
             throw new UnknownAccountException();
         }
-        if (!upmsUser.getPassword().equals(MD5Util.md5(password + upmsUser.getSalt()))) {
+        if (!urightsUser.getPassword().equals(MD5Util.md5(password + urightsUser.getSalt()))) {
             throw new IncorrectCredentialsException();
         }
-        if (upmsUser.getLocked() == 1) {
+        if (urightsUser.getLocked() == 1) {
             throw new LockedAccountException();
         }
 
@@ -105,4 +98,3 @@ public class UrightsRealm extends AuthorizingRealm {
     }
 
 }
-*/
