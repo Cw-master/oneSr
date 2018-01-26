@@ -70,14 +70,14 @@ public class UrightsAuthenticationFilter extends AuthenticationFilter {
 
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
-        StringBuffer ssoServerUrl = new StringBuffer(PropertiesFileUtil.getInstance("oneSr-urights-client").get("cxb.chen.urights.sso.server.url"));
+        StringBuffer ssoServerUrl = new StringBuffer(PropertiesFileUtil.getInstance("oneSr-urights-client").get("oneSr.urights.sso.server.url"));
         // server需要登录
         String UrightsType = PropertiesFileUtil.getInstance("oneSr-urights-client").get("oneSr.urights.type");
         if ("server".equals(UrightsType)) {
             WebUtils.toHttp(response).sendRedirect(ssoServerUrl.append("/sso/login").toString());
             return false;
         }
-        ssoServerUrl.append("/sso/index").append("?").append("appid").append("=").append(PropertiesFileUtil.getInstance("oneSr-urights-client").get("zheng.Urights.appID"));
+        //ssoServerUrl.append("/sso/index").append("?").append("appid").append("=").append(PropertiesFileUtil.getInstance("oneSr-urights-client").get("oneSr.urights.appID"));
         // 回跳地址
         HttpServletRequest httpServletRequest = WebUtils.toHttp(request);
         StringBuffer backurl = httpServletRequest.getRequestURL();
@@ -126,7 +126,7 @@ public class UrightsAuthenticationFilter extends AuthenticationFilter {
         if (StringUtils.isNotBlank(code)) {
             // HttpPost去校验code
             try {
-                StringBuffer ssoServerUrl = new StringBuffer(PropertiesFileUtil.getInstance("oneSr-urights-client").get("cxb.chen.urights.sso.server.url"));
+                StringBuffer ssoServerUrl = new StringBuffer(PropertiesFileUtil.getInstance("oneSr-urights-client").get("oneSr.urights.sso.server.url"));
                 HttpClient httpclient = new DefaultHttpClient();
                 HttpPost httpPost = new HttpPost(ssoServerUrl.toString() + "/sso/code");
 
