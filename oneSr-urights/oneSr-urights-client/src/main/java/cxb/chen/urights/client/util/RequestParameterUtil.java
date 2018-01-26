@@ -21,7 +21,7 @@ public class RequestParameterUtil {
         String params = "";
         Map<String, String[]> paramMap = request.getParameterMap();
         for (Map.Entry<String, String[]> entry: paramMap.entrySet()) {
-            if (!"upms_code".equals(entry.getKey()) && !"upms_username".equals(entry.getKey())) {
+            if (!"urights_code".equals(entry.getKey()) && !"urights_username".equals(entry.getKey())) {
                 if ("".equals(params)) {
                     params = entry.getKey() + "=" + entry.getValue()[0];
                 } else {

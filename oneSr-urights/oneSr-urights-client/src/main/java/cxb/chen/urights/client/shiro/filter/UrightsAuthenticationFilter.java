@@ -1,11 +1,11 @@
 package cxb.chen.urights.client.shiro.filter;
 
 import com.alibaba.fastjson.JSONObject;
-import com.zheng.common.util.PropertiesFileUtil;
-import com.zheng.common.util.RedisUtil;
-import com.zheng.upms.client.shiro.session.UpmsSessionDao;
-import com.zheng.upms.client.util.RequestParameterUtil;
-import com.zheng.upms.common.constant.UpmsConstant;
+import cxb.chen.common.util.PropertiesFileUtil;
+import cxb.chen.common.util.RedisUtil;
+import cxb.chen.urights.client.shiro.session.UrightsSessionDao;
+import cxb.chen.urights.client.util.RequestParameterUtil;
+import cxb.chen.urights.common.UrightsConstant;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -38,31 +38,31 @@ import java.util.List;
 
 /**
  * 重写authc过滤器
- * Created by shuzheng on 2017/3/11.
+ * @author chen
  */
 public class UrightsAuthenticationFilter extends AuthenticationFilter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UrightsAuthenticationFilter.class);
 
     // 局部会话key
-    private final static String ZHENG_UPMS_CLIENT_SESSION_ID = "zheng-upms-client-session-id";
+    private final static String ONESR_URIGHTS_CLIENT_SESSION_ID = "oneSr-urights-client-session-id";
     // 单点同一个code所有局部会话key
-    private final static String ZHENG_UPMS_CLIENT_SESSION_IDS = "zheng-upms-client-session-ids";
+    private final static String ONESR_URIGHTS_CLIENT_SESSION_IDS = "oneSr-urights-client-session-ids";
 
     @Autowired
-    UpmsSessionDao upmsSessionDao;
+    UrightsSessionDao urightsSessionDao;
 
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
         Subject subject = getSubject(request, response);
         Session session = subject.getSession();
         // 判断请求类型
-        String upmsType = PropertiesFileUtil.getInstance("zheng-upms-client").get("zheng.upms.type");
-        session.setAttribute(UpmsConstant.UPMS_TYPE, upmsType);
-        if ("client".equals(upmsType)) {
+        String UrightsType = PropertiesFileUtil.getInstance("oneSr-urights-client").get("oneSr.urights.type");
+        session.setAttribute(UrightsConstant.URIGHTS_TYPE, UrightsType);
+        if ("client".equals(UrightsType)) {
             return validateClient(request, response);
         }
-        if ("server".equals(upmsType)) {
+        if ("server".equals(UrightsType)) {
             return subject.isAuthenticated();
         }
         return false;
@@ -70,14 +70,14 @@ public class UrightsAuthenticationFilter extends AuthenticationFilter {
 
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
-        StringBuffer ssoServerUrl = new StringBuffer(PropertiesFileUtil.getInstance("zheng-upms-client").get("zheng.upms.sso.server.url"));
+        StringBuffer ssoServerUrl = new StringBuffer(PropertiesFileUtil.getInstance("oneSr-urights-client").get("oneSr.urights.sso.server.url"));
         // server需要登录
-        String upmsType = PropertiesFileUtil.getInstance("zheng-upms-client").get("zheng.upms.type");
-        if ("server".equals(upmsType)) {
+        String UrightsType = PropertiesFileUtil.getInstance("oneSr-urights-client").get("oneSr.urights.type");
+        if ("server".equals(UrightsType)) {
             WebUtils.toHttp(response).sendRedirect(ssoServerUrl.append("/sso/login").toString());
             return false;
         }
-        ssoServerUrl.append("/sso/index").append("?").append("appid").append("=").append(PropertiesFileUtil.getInstance("zheng-upms-client").get("zheng.upms.appID"));
+        //ssoServerUrl.append("/sso/index").append("?").append("appid").append("=").append(PropertiesFileUtil.getInstance("oneSr-urights-client").get("oneSr.urights.appID"));
         // 回跳地址
         HttpServletRequest httpServletRequest = WebUtils.toHttp(request);
         StringBuffer backurl = httpServletRequest.getRequestURL();
@@ -100,16 +100,16 @@ public class UrightsAuthenticationFilter extends AuthenticationFilter {
         String sessionId = session.getId().toString();
         int timeOut = (int) session.getTimeout() / 1000;
         // 判断局部会话是否登录
-        String cacheClientSession = RedisUtil.get(ZHENG_UPMS_CLIENT_SESSION_ID + "_" + session.getId());
+        String cacheClientSession = RedisUtil.get(ONESR_URIGHTS_CLIENT_SESSION_ID + "_" + session.getId());
         if (StringUtils.isNotBlank(cacheClientSession)) {
             // 更新code有效期
-            RedisUtil.set(ZHENG_UPMS_CLIENT_SESSION_ID + "_" + sessionId, cacheClientSession, timeOut);
+            RedisUtil.set(ONESR_URIGHTS_CLIENT_SESSION_ID + "_" + sessionId, cacheClientSession, timeOut);
             Jedis jedis = RedisUtil.getJedis();
-            jedis.expire(ZHENG_UPMS_CLIENT_SESSION_IDS + "_" + cacheClientSession, timeOut);
+            jedis.expire(ONESR_URIGHTS_CLIENT_SESSION_IDS + "_" + cacheClientSession, timeOut);
             jedis.close();
             // 移除url中的code参数
             if (null != request.getParameter("code")) {
-                String backUrl = RequestParameterUtil.getParameterWithOutCode(WebUtils.toHttp(request));
+                String backUrl = RequestParameterUtil.getParameterWithOutcode(WebUtils.toHttp(request));
                 HttpServletResponse httpServletResponse = WebUtils.toHttp(response);
                 try {
                     httpServletResponse.sendRedirect(backUrl.toString());
@@ -121,12 +121,12 @@ public class UrightsAuthenticationFilter extends AuthenticationFilter {
             }
         }
         // 判断是否有认证中心code
-        String code = request.getParameter("upms_code");
+        String code = request.getParameter("urights_code");
         // 已拿到code
         if (StringUtils.isNotBlank(code)) {
             // HttpPost去校验code
             try {
-                StringBuffer ssoServerUrl = new StringBuffer(PropertiesFileUtil.getInstance("zheng-upms-client").get("zheng.upms.sso.server.url"));
+                StringBuffer ssoServerUrl = new StringBuffer(PropertiesFileUtil.getInstance("oneSr-urights-client").get("oneSr.urights.sso.server.url"));
                 HttpClient httpclient = new DefaultHttpClient();
                 HttpPost httpPost = new HttpPost(ssoServerUrl.toString() + "/sso/code");
 
@@ -140,16 +140,16 @@ public class UrightsAuthenticationFilter extends AuthenticationFilter {
                     JSONObject result = JSONObject.parseObject(EntityUtils.toString(httpEntity));
                     if (1 == result.getIntValue("code") && result.getString("data").equals(code)) {
                         // code校验正确，创建局部会话
-                        RedisUtil.set(ZHENG_UPMS_CLIENT_SESSION_ID + "_" + sessionId, code, timeOut);
+                        RedisUtil.set(ONESR_URIGHTS_CLIENT_SESSION_ID + "_" + sessionId, code, timeOut);
                         // 保存code对应的局部会话sessionId，方便退出操作
-                        RedisUtil.sadd(ZHENG_UPMS_CLIENT_SESSION_IDS + "_" + code, sessionId, timeOut);
-                        LOGGER.debug("当前code={}，对应的注册系统个数：{}个", code, RedisUtil.getJedis().scard(ZHENG_UPMS_CLIENT_SESSION_IDS + "_" + code));
+                        RedisUtil.sadd(ONESR_URIGHTS_CLIENT_SESSION_IDS + "_" + code, sessionId, timeOut);
+                        LOGGER.debug("当前code={}，对应的注册系统个数：{}个", code, RedisUtil.getJedis().scard(ONESR_URIGHTS_CLIENT_SESSION_IDS + "_" + code));
                         // 移除url中的token参数
-                        String backUrl = RequestParameterUtil.getParameterWithOutCode(WebUtils.toHttp(request));
+                        String backUrl = RequestParameterUtil.getParameterWithOutcode(WebUtils.toHttp(request));
                         // 返回请求资源
                         try {
                             // client无密认证
-                            String username = request.getParameter("upms_username");
+                            String username = request.getParameter("urights_username");
                             subject.login(new UsernamePasswordToken(username, ""));
                             HttpServletResponse httpServletResponse = WebUtils.toHttp(response);
                             httpServletResponse.sendRedirect(backUrl.toString());

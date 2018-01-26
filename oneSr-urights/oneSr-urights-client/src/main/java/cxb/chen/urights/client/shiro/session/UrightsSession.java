@@ -4,7 +4,7 @@ import org.apache.shiro.session.mgt.SimpleSession;
 
 /**
  * 重写session
- * Created by shuzheng on 2017/2/27.
+ * @author chen
  */
 public class UrightsSession extends SimpleSession {
 

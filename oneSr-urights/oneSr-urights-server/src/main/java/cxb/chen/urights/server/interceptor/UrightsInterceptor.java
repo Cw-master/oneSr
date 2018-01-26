@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 public class UrightsInterceptor extends HandlerInterceptorAdapter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UrightsInterceptor.class);
-    private static final String CHEN_OSS_ALIYUN_OSS_POLICY = PropertiesFileUtil.getInstance("chen-oss-client").get("cehn.oss.aliyun.oss.policy");
+    private static final String CHEN_OSS_ALIYUN_OSS_POLICY = PropertiesFileUtil.getInstance("oneSr-oss-client").get("oneSr.oss.aliyun.oss.policy");
 
     @Autowired
     UrightsApiService urightsApiService;
